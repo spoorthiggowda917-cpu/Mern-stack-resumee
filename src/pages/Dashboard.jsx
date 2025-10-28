@@ -6,7 +6,6 @@ import {
   TrashIcon,
   PencilIcon,
   XIcon,
-  UploadCloud,
 } from "lucide-react";
 import { dummyResumeData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +18,7 @@ function Dashboard() {
   const [showUploadResume, setShowUploadResume] = useState(false)
   const [title, setTitle] = useState("")
   const [resume, setResume] = useState(null)
-  const [editResumeId, setEditResumeId] = useState("")
+ // const [editResumeId, setEditResumeId] = useState("")
   const [allResumes, setAllResumes] = useState([]);
   const navigate = useNavigate()
 
@@ -139,8 +138,8 @@ const uploadResume = async (event) => {
 
       {showUploadResume && (
           <form onSubmit={uploadResume} onClick={() => setShowUploadResume(false)} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
-
-            <div onClick={e => e.stopPropagation()} /*This is the actual popup box in the center containing input fields and buttons.*/
+            {/*This is the actual popup box in the center containing input fields and buttons.*/}
+            <div onClick={e => e.stopPropagation()} 
               className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6">
               <h2>Upload a Resume</h2>
               <input onChange={(e)=>setTitle(e.target.value)} value={title}
