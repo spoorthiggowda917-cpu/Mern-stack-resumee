@@ -4,7 +4,7 @@ import HeroSection from '../Components/Home/HeroSection'
 import Feature from '../Components/Home/Feature'
 import Testimonial from '../Components/Home/Testimonial'
 import CallToAction from '../Components/Home/CallToAction'
-import Footer from '../Components/Footer'
+import Footer from '../Components/Home/Footer'
 
 
 
