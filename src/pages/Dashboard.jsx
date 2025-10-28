@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   FilePenLineIcon,
   PlusIcon,
+  UploadCloudIcon,
   UploadCloud,
   TrashIcon,
   PencilIcon,
