@@ -39,7 +39,23 @@ const uploadResume = async (event) => {
     setShowUploadResume(false)//This closes the upload popup modal.
     navigate("/app/builder/res123");
   }
+  const editTitle=async(event)=>{
+    event.preventDefault();
+  }
 
+  const deleteResume=async(resumeId)=>{
+    const confirm=window.confirm("Are you sure you want to delete this resume")
+    if(confirm){
+      setAllResumes(prev=>prev.filter(resume=>resume._id!== resumeId))
+    }
+  }
+  {/*window.confirm() → Opens a confirmation popup asking the user if they really want to delete.
+Returns true if user clicks OK, false if they click Cancel.
+if (confirm) → Runs only if the user clicked OK.
+setAllResumes(prev => prev.filter(...)) →
+Takes the previous state (prev) — an array of all resumes.
+.filter() removes the resume whose _id matches resumeId.
+Updates the state with the new filtered array.*/}
   useEffect(() => {
     loadAllResumes();
   }, []);
@@ -77,7 +93,7 @@ const uploadResume = async (event) => {
 
             return (
               <button
-                key={index}
+                key={index} onClick={()=>navigate("/app/builder/$resume_id")}
                 className="relative w-full sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 border group hover:shadow-lg transition-all duration-300 cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, ${baseColor}10, ${baseColor}40)`,
@@ -107,14 +123,15 @@ const uploadResume = async (event) => {
                 </p>
 
                 {/* Edit & Delete Icons */}
-                <div className="absolute top-1 right-1 hidden group-hover:flex items-center gap-1">
-                  <TrashIcon className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors cursor-pointer" />
-                  <PencilIcon className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors cursor-pointer" />
+                <div onClick={e=>e.stopPropagation()} className="absolute top-1 right-1 hidden group-hover:flex items-center gap-1">
+                  <TrashIcon onClick={()=>deleteResume(resume._id)} className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors cursor-pointer" />
+                  <PencilIcon onClick={()=>{setEditResumeId(resume._id); setTitle(resume.title)}} className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors cursor-pointer" />
                 </div>
               </button>
             );
           })}
         </div>
+{/*Creating resume*/}
         {showCreateResume && (
           <form onSubmit={createResume} onClick={() => setShowCreateResume(false)} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
 
@@ -136,7 +153,7 @@ const uploadResume = async (event) => {
           </form>
         )}
       </div>
-
+{/*Uploading resume*/}
       {showUploadResume && (
           <form onSubmit={uploadResume} onClick={() => setShowUploadResume(false)} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
             {/*This is the actual popup box in the center containing input fields and buttons.*/}
@@ -169,6 +186,28 @@ const uploadResume = async (event) => {
                 className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">Upload Resume</button>
               <XIcon className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors" onClick={() => {
                 setShowUploadResume(false); setTitle('');
+              }} />
+            </div>
+          </form>
+        )}
+{/*Editing resume*/}
+
+        {editResumeId && (
+          <form onSubmit={editTitle} onClick={() => setEditResumeId("")} className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center">
+
+            <div onClick={e => e.stopPropagation()} /*This is the actual popup box in the center containing input fields and buttons.*/
+              className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6">
+              <h2>Edit Resume Title</h2>
+              <input
+                type="text"
+                placeholder="Enter resume title"
+                className="w-full px-4 py-2 mb-4 border focus:border-green-600 ring-green-600 rounded outline-none"
+                required
+                value={title} onChange={(e) => setTitle(e.target.value)} />
+              <button
+                className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">Update</button>
+              <XIcon className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors" onClick={() => {
+                setEditResumeId(false); setTitle('');
               }} />
             </div>
           </form>
