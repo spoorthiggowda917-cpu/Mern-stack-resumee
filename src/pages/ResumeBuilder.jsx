@@ -34,7 +34,7 @@ If found, it sets it as the current resume (setResumeData(resume)).
 Also updates the browser tab title to the resume title.*/}
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0)
-  const [removeBackground, setRemovebackground] = useState(false)
+  const [removeBackground, setRemoveBackground] = useState(false)
 
   const sections = [
     { id: "personal", name: "Personal Info", icon: User },
@@ -103,7 +103,7 @@ Prevent going beyond last index.*/}
               <div className='space-y-6'>
                 {activeSection.id === 'personal' && (
                   <PersonalInfoForm data={resumeData.personal_info} onChange={(data) => setResumeData(prev => ({ ...prev, personal_info: data }))}
-                    removeBackground={removeBackground} setRemoveBackground={setRemovebackground} />
+                    removeBackground={removeBackground} setRemoveBackground={setRemoveBackground} />
                 )}
               </div>
 
