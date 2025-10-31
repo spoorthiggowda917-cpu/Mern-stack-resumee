@@ -50,7 +50,7 @@ Also updates the browser tab title to the resume title.*/}
 
   useEffect(() => {
     loadExistingResume()
-  }, [])
+  }, [resumeId])
 
 
   return (
