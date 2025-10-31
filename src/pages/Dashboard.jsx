@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
 
   const colors = ["#9333ea", "#d97706", "#dc2626", "#16a34a"];
+  const [resumes, setResumes] = useState(dummyResumeData);
+
 
   const [showCreateResume, setShowCreateResume] = useState(false)
   const [showUploadResume, setShowUploadResume] = useState(false)
@@ -39,9 +41,23 @@ const uploadResume = async (event) => {
     setShowUploadResume(false)//This closes the upload popup modal.
     navigate("/app/builder/res123");
   }
-  const editTitle=async(event)=>{
-    event.preventDefault();
-  }
+ const editTitle = (e) => {
+  e.preventDefault();
+
+  setAllResumes((prevResumes) =>
+    prevResumes.map((resume) =>
+      resume._id === editResumeId
+        ? { ...resume, title } // update title only
+        : resume
+    )
+  );
+
+  setEditResumeId("");
+  setTitle("");
+};
+
+
+
 
   const deleteResume=async(resumeId)=>{
     const confirm=window.confirm("Are you sure you want to delete this resume")

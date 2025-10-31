@@ -6,7 +6,14 @@ function PersonalInfoForm({ data, onChange, removeBackground, setRemoveBackgroun
     const handleChange = (field, value) => {
         onChange({ ...data, [field]: value })
     }
-
+/*creates a new updated object — a copy of the old data, but with one field changed.
+...data → copies all existing personal info (like name, email, etc.)
+[field]: value → updates or adds one property.
+[data = { name: "Spoorthi", email: "spoorthi@gmail.com" }
+handleChange("email", "newemail@gmail.com")
+ Result:
+{ name: "Spoorthi", email: "newemail@gmail.com" }]
+ */
 
     return (
         <div>
@@ -24,10 +31,18 @@ function PersonalInfoForm({ data, onChange, removeBackground, setRemoveBackgroun
                             <User className='size-10 p-2.5 border rounded-full' />
                             upload user image
                         </div>
+
                     )}
+{/*✅ If it’s a "string" → the browser already knows how to fetch it (from internet or your database).
+⚙️ If it’s a File → the browser doesn’t yet have a real URL,
+so URL.createObjectURL() creates a temporary one like blob:http://localhost/....*/}
+
+
                     <input type='file' accept='image/jpeg,image/png' className='hidden'
                         onChange={(e) => handleChange("image", e.target.files[0])} />
                 </label>
+
+                {/*Background remove toggle*/}
                 {typeof data.image === 'object' && (
   <div className="flex flex-col gap-2 pl-4 text-sm mt-2">
     <p className="font-medium text-gray-700">Remove Background</p>

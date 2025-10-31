@@ -78,7 +78,7 @@ Also updates the browser tab title to the resume title.*/}
                   {activeSectionIndex !== 0 && (
                     <button onClick={() => setActiveSectionIndex((prevIndex) => Math.max(prevIndex - 1, 0))} className="flex items-center gap-1 p-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all"
                       disabled={activeSectionIndex === 0}>
-                      {/* Your button content here */}
+
                       <ChevronLeft className='size-4' />Previous
                     </button>
                   )}
@@ -90,6 +90,15 @@ Also updates the browser tab title to the resume title.*/}
                   </button>
                 </div>
               </div>
+              {/*The “Previous” button will only appear if you are not on the first section (index 0).
+Math.max(prevIndex - 1, 0) → ensures the index never goes below 0.
+(So even if you click “Previous” on the first section, it stays at 0.)
+Math.min(..., sections.length - 1) → ensures it doesn’t go beyond the last section
+Why use Math.max and Math.min?
+
+They act like safety guards:
+Prevent going below first index.
+Prevent going beyond last index.*/}
               {/*Form Content*/}
               <div className='space-y-6'>
                 {activeSection.id === 'personal' && (
