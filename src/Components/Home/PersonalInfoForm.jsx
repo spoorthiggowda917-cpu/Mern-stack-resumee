@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Globe, Icon, Linkedin, Mail, MapPin, Phone, User } from 'lucide-react'
+import { BriefcaseBusiness, Github, Icon, Linkedin, Mail, MapPin, Phone, User } from 'lucide-react'
 import React from 'react'
 
 function PersonalInfoForm({ data={}, onChange, removeBackground, setRemoveBackground }) {
@@ -22,7 +22,7 @@ const fields=[
     {key:"location", label:"Location", icon:MapPin, type: "text"},
     {key:"profession", label:"profession", icon:BriefcaseBusiness, type: "text"},
     {key:"linkedin", label:"LinkedIn Profile", icon: Linkedin, type: "url"},
-    {key:"website", label:"Personal Website", icon:Globe, type: "url"},
+    {key:"github", label:"Github", icon:Github, type: "url"},
 ]
 
     return (
@@ -84,7 +84,7 @@ so URL.createObjectURL() creates a temporary one like blob:http://localhost/....
 
       <input
         type={field.type}
-        value={data[field.key] || ""}
+        value={data[field.key] || " "}
         onChange={(e) => handleChange(field.key, e.target.value)}
         className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm"
         placeholder={`Enter your ${field.label.toLowerCase()}`}
