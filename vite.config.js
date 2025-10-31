@@ -8,6 +8,6 @@ export default defineConfig({
     postcss: {}, // ensure Tailwind uses PostCSS engine
   },
   optimizeDeps: {
-    exclude: ['lightningcss'], // ⛔ force Vite to ignore it
+    exclude: ['lightningcss'], 
   },
 })
